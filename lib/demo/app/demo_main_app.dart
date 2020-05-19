@@ -21,13 +21,17 @@ class DemoMainApp extends StatelessWidget {
 /// 主页面
 class DemoMainWidget extends StatelessWidget {
   final List<Widget> demoItems = List.from([
-    DemoItemWidget("1.Test" * 2, (context) {
+    DemoItemWidget("1.WidgetDemo" * 20, (context) {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (ctx) => WidgetDemoAbc()));
     }),
-    DemoItemWidget("2.Test" * 20, (context) {
+    DemoItemWidget("2.ButtonDemo", (context) {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (ctx) => ButtonDemoAbc()));
+    }),
+    DemoItemWidget("3.ImageDemo", (context) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (ctx) => ImageDemoAbc()));
     }),
   ]);
 
@@ -72,15 +76,21 @@ class DemoItemWidget extends StatelessWidget {
                   onTap(context);
                 },
                 child: Container(
+                  height: 50,
                   padding:
                       EdgeInsets.only(top: 4, bottom: 4, left: 4, right: 4),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      FlutterLogo(),
+                      Padding(
+                        padding: EdgeInsets.all(4),
+                        child: FlutterLogo(),
+                      ),
                       Expanded(
                         child: Text(
                           itemText,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Icon(Icons.chevron_right)

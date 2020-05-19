@@ -1,20 +1,22 @@
-import 'package:angcyo_flutter_app/widget/widget.dart';
-
 import '../app.dart';
 
 class BaseDemoAbc extends StatelessWidget {
-  BaseDemoAbc(this.title, {this.child, this.children});
+  BaseDemoAbc(this.title, {this.child, this.children, this.scroll = false})
+      : assert(child != null || children != null);
 
   final Widget child;
   final Object title;
   final List<Widget> children;
+  final bool scroll;
 
   @override
   Widget build(BuildContext context) {
     Widget body;
 
-    if (children != null) {
-      body = MyFlowWidget(
+    if (scroll) {
+      body = ListView(children: children ?? <Widget>[child]);
+    } else if (children != null) {
+      body = Wrap(
         children: children,
       );
     } else {
@@ -23,6 +25,7 @@ class BaseDemoAbc extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text("$title"),
         ),
         body: body);
