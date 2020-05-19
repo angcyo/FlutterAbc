@@ -33,6 +33,14 @@ class DemoMainWidget extends StatelessWidget {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (ctx) => ImageDemoAbc()));
     }),
+    DemoItemWidget("4.CheckDemo", (context) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (ctx) => CheckDemoAbc()));
+    }),
+    DemoItemWidget("5.EditDemo", (context) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (ctx) => EditDemoAbc()));
+    }),
   ]);
 
   @override
