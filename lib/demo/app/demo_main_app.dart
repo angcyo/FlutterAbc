@@ -60,6 +60,8 @@ class DemoItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+
     return Padding(
         padding: EdgeInsets.only(top: 1),
         child: GestureDetector(
@@ -93,7 +95,10 @@ class DemoItemWidget extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      Icon(Icons.chevron_right)
+                      Icon(
+                        Icons.chevron_right,
+                        color: themeData.accentColor,
+                      )
                     ],
                   ),
                 ),
