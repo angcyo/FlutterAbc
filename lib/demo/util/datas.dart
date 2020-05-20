@@ -71,6 +71,8 @@ final _imageList = <String>[
   "http://5b0988e595225.cdn.sohucs.com/images/20171227/157724ff25b9415e8853050a58e4a581.gif"
 ];
 
+const GITHUB_URL = "https://github.com/angcyo/FlutterAbc";
+
 String tx() => WordPair.random().asPascalCase;
 
 IconData ic() => _iconList[random.nextInt(_iconList.length)];
