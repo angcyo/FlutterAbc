@@ -50,6 +50,7 @@ class _CheckDemoAbcState extends State<CheckDemoAbc> {
           tristate: false,
           onChanged: onChange,
         ),
+        text(),
         Radio(
           value: RadioValue.a,
           groupValue: radio,
@@ -65,6 +66,7 @@ class _CheckDemoAbcState extends State<CheckDemoAbc> {
           groupValue: radio,
           onChanged: onRadioChange,
         ),
+        text(),
         Container(
           alignment: Alignment.centerLeft,
           child: Text(tx() + " $slider"),

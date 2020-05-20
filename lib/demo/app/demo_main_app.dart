@@ -21,7 +21,8 @@ class DemoMainApp extends StatelessWidget {
 /// 主页面
 class DemoMainWidget extends StatelessWidget {
   final List<Widget> demoItems = List.from([
-    DemoItemWidget("1.WidgetDemo" * 20, (context) {
+    Container(height: 10),
+    DemoItemWidget("1.WidgetDemo", (context) {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (ctx) => WidgetDemoAbc()));
     }),
@@ -40,6 +41,10 @@ class DemoMainWidget extends StatelessWidget {
     DemoItemWidget("5.EditDemo", (context) {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (ctx) => EditDemoAbc()));
+    }),
+    DemoItemWidget("6.IndicatorDemo", (context) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (ctx) => IndicatorDemoAbc()));
     }),
   ]);
 
@@ -85,29 +90,31 @@ class DemoItemWidget extends StatelessWidget {
                 onTap: () {
                   onTap(context);
                 },
-                child: Container(
-                  height: 50,
-                  padding:
-                      EdgeInsets.only(top: 4, bottom: 4, left: 4, right: 4),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(4),
-                        child: FlutterLogo(),
-                      ),
-                      Expanded(
-                        child: Text(
-                          itemText,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: 50),
+                  child: Container(
+                    padding:
+                        EdgeInsets.only(top: 4, bottom: 4, left: 4, right: 4),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(4),
+                          child: FlutterLogo(),
                         ),
-                      ),
-                      Icon(
-                        Icons.chevron_right,
-                        color: themeData.accentColor,
-                      )
-                    ],
+                        Expanded(
+                          child: Text(
+                            itemText,
+                            maxLines: 5,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Icon(
+                          Icons.chevron_right,
+                          color: themeData.accentColor,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -17,6 +17,7 @@ class BaseDemoAbc extends StatelessWidget {
       body = ListView(children: children ?? <Widget>[child]);
     } else if (children != null) {
       body = Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: children,
       );
     } else {
