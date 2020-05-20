@@ -18,36 +18,48 @@ class DemoMainApp extends StatelessWidget {
   }
 }
 
+final List<Widget> demoItems = List.from([
+  Container(height: 10),
+  DemoItemWidget("1.WidgetDemo", (context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => WidgetDemoAbc()));
+  }),
+  DemoItemWidget("2.ButtonDemo", (context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => ButtonDemoAbc()));
+  }),
+  DemoItemWidget("3.ImageDemo", (context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => ImageDemoAbc()));
+  }),
+  DemoItemWidget("4.CheckDemo", (context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => CheckDemoAbc()));
+  }),
+  DemoItemWidget("5.EditDemo", (context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => EditDemoAbc()));
+  }),
+  DemoItemWidget("6.IndicatorDemo", (context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => IndicatorDemoAbc()));
+  }),
+  DemoItemWidget("7.ScaffoldDemo", (context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => ScaffoldDemoAbc()));
+  }),
+  DemoItemWidget("8.TabDemo", (context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => TabDemoAbc()));
+  }),
+  DemoItemWidget("9.ClipDemo", (context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => ClipDemoAbc()));
+  }),
+]);
+
 /// 主页面
 class DemoMainWidget extends StatelessWidget {
-  final List<Widget> demoItems = List.from([
-    Container(height: 10),
-    DemoItemWidget("1.WidgetDemo", (context) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (ctx) => WidgetDemoAbc()));
-    }),
-    DemoItemWidget("2.ButtonDemo", (context) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (ctx) => ButtonDemoAbc()));
-    }),
-    DemoItemWidget("3.ImageDemo", (context) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (ctx) => ImageDemoAbc()));
-    }),
-    DemoItemWidget("4.CheckDemo", (context) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (ctx) => CheckDemoAbc()));
-    }),
-    DemoItemWidget("5.EditDemo", (context) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (ctx) => EditDemoAbc()));
-    }),
-    DemoItemWidget("6.IndicatorDemo", (context) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (ctx) => IndicatorDemoAbc()));
-    }),
-  ]);
-
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -56,6 +68,25 @@ class DemoMainWidget extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(title),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            FlutterLogo(size: 120),
+            WellItemWidget(
+              child: Text("浏览Github"),
+              onPressed: () {
+                browseUrl(context, GITHUB_URL);
+              },
+            ),
+            WellItemWidget(
+              child: Text("打开Github"),
+              onPressed: () {
+                launcher(GITHUB_URL);
+              },
+            ),
+          ],
+        ),
       ),
       body: ListView(
         children: demoItems,
