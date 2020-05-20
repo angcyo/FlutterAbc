@@ -56,6 +56,14 @@ final List<Widget> demoItems = List.from([
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (ctx) => ClipDemoAbc()));
   }),
+  DemoItemWidget("10.GridDemo", (context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => GridDemoAbc()));
+  }),
+  DemoItemWidget("11.StaggeredDemo", (context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => StaggeredDemoAbc()));
+  }),
 ]);
 
 /// 主页面
@@ -64,34 +72,39 @@ class DemoMainWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     return Scaffold(
-      backgroundColor: themeData.backgroundColor,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(title),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            FlutterLogo(size: 120),
-            WellItemWidget(
-              child: Text("浏览Github"),
-              onPressed: () {
-                browseUrl(context, GITHUB_URL);
-              },
-            ),
-            WellItemWidget(
-              child: Text("打开Github"),
-              onPressed: () {
-                launcher(GITHUB_URL);
-              },
-            ),
-          ],
+        backgroundColor: themeData.backgroundColor,
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(title),
         ),
-      ),
-      body: ListView(
-        children: demoItems,
-      ),
-    );
+        drawer: Drawer(
+          child: ListView(
+            physics:
+                AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+            children: <Widget>[
+              FlutterLogo(size: 120),
+              WellItemWidget(
+                child: Text("浏览Github"),
+                onPressed: () {
+                  browseUrl(context, GITHUB_URL);
+                },
+              ),
+              WellItemWidget(
+                child: Text("打开Github"),
+                onPressed: () {
+                  launcher(GITHUB_URL);
+                },
+              ),
+            ],
+          ),
+        ),
+        body: ListView.builder(
+            itemCount: demoItems.length,
+            physics:
+                AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+            itemBuilder: (ctx, index) {
+              return demoItems[index];
+            }));
   }
 }
 

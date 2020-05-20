@@ -14,7 +14,14 @@ class BaseDemoAbc extends StatelessWidget {
     Widget body;
 
     if (scroll) {
-      body = ListView(children: children ?? <Widget>[child]);
+      List items = children ?? <Widget>[child];
+      body = ListView.builder(
+          physics:
+              AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          itemCount: items.length,
+          itemBuilder: (ctx, index) {
+            return items[index];
+          });
     } else if (children != null) {
       body = Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
