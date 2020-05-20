@@ -1,5 +1,3 @@
-import 'package:angcyo_flutter_app/angcyo_flutter_app.dart';
-
 import '../app.dart';
 
 ///const FlatButton({

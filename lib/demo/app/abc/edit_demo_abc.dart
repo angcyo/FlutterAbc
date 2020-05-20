@@ -1,5 +1,4 @@
-import 'package:abc/demo/app/abc/base_demo_abc.dart';
-import 'package:flutter/material.dart';
+import '../app.dart';
 
 class EditDemoAbc extends StatelessWidget {
   @override
