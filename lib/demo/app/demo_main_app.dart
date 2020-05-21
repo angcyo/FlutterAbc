@@ -64,6 +64,10 @@ final List<Widget> demoItems = List.from([
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (ctx) => StaggeredDemoAbc()));
   }),
+  DemoItemWidget("12.CustomScrollDemo", (context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => CustomScrollDemoAbc()));
+  }),
 ]);
 
 /// 主页面
@@ -78,26 +82,39 @@ class DemoMainWidget extends StatelessWidget {
           title: Text(title),
         ),
         drawer: Drawer(
+            child: Container(
+          color: themeData.backgroundColor,
           child: ListView(
             physics:
                 AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
             children: <Widget>[
               FlutterLogo(size: 120),
-              WellItemWidget(
-                child: Text("浏览Github"),
-                onPressed: () {
+              WhiteListTile(
+                title: Text("浏览Github"),
+                onTap: () {
                   browseUrl(context, GITHUB_URL);
                 },
               ),
-              WellItemWidget(
-                child: Text("打开Github"),
-                onPressed: () {
+              WhiteListTile(
+                title: Text("打开Github"),
+                onTap: () {
                   launcher(GITHUB_URL);
                 },
               ),
+              WellItemWidget(
+                child: Text("WellItemWidget Test"),
+                onPressed: () {
+                  toast("${DateTime.now()}");
+                },
+              ),
+              Expanded(
+                  child: Align(
+                heightFactor: 5,
+                child: Text(DateTime.now().toString()),
+              ))
             ],
           ),
-        ),
+        )),
         body: ListView.builder(
             itemCount: demoItems.length,
             physics:
