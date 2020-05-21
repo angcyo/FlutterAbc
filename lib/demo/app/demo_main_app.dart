@@ -32,6 +32,7 @@ final List<Widget> demoItems = List.from([
   DemoItemWidget("10.GridDemo", GridDemoAbc()),
   DemoItemWidget("11.StaggeredDemo", StaggeredDemoAbc()),
   DemoItemWidget("12.CustomScrollDemo", CustomScrollDemoAbc()),
+  DemoItemWidget("13.InheritedWidgetDemo", InheritedWidgetDemoAbc()),
 ]);
 
 /// 主页面
