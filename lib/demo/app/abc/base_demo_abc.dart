@@ -19,6 +19,8 @@ class BaseDemoAbc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+
     Widget body;
 
     if (scroll) {
@@ -46,9 +48,11 @@ class BaseDemoAbc extends StatelessWidget {
     }
 
     return Scaffold(
-        appBar: AppBar(
+        appBar: GradientAppBar(
           centerTitle: true,
           title: Text("$title"),
+          gradientStart: themeData.primaryColor,
+          gradientEnd: themeData.primaryColorDark,
         ),
         body: body);
   }

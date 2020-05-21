@@ -50,8 +50,10 @@ class _DemoMainWidgetState extends State<DemoMainWidget> {
     return WillPopScope(
         child: Scaffold(
             backgroundColor: themeData.backgroundColor,
-            appBar: AppBar(
+            appBar: GradientAppBar(
               centerTitle: true,
+              gradientStart: themeData.primaryColor,
+              gradientEnd: themeData.primaryColorDark,
               title: Text(title),
             ),
             drawer: Drawer(
