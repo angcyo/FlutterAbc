@@ -22,8 +22,7 @@ class BaseDemoAbc extends StatelessWidget {
     if (scroll) {
       List items = children ?? <Widget>[child];
       dynamic list = ListView.builder(
-          physics:
-              AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          physics: absPhysics,
           itemCount: items.length,
           itemBuilder: (ctx, index) {
             return items[index];
