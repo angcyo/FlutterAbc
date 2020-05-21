@@ -1,6 +1,36 @@
 import '../app.dart';
 
-class CustomScrollDemoAbc extends StatelessWidget {
+class CustomScrollDemoAbc extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _CustomScrollDemoAbcState();
+}
+
+class _CustomScrollDemoAbcState extends State<CustomScrollDemoAbc>
+    with SingleTickerProviderStateMixin {
+  final List<Widget> tabs = [text(), text(), text(), text(), text(), text()];
+
+  TabController _tabController;
+
+  int tabIndex = 0;
+
+  @override
+  void initState() {
+    _tabController =
+        TabController(initialIndex: tabIndex, length: tabs.length, vsync: this);
+    _tabController.addListener(() {
+      setState(() {
+        tabIndex = _tabController.index;
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     //因为本路由没有使用Scaffold，为了让子级Widget(如Text)使用
@@ -30,6 +60,11 @@ class CustomScrollDemoAbc extends StatelessWidget {
                 StretchMode.blurBackground,
                 StretchMode.fadeTitle,
               ],
+            ),
+            bottom: TabBar(
+              controller: _tabController,
+              isScrollable: true,
+              tabs: tabs,
             ),
           ),
 

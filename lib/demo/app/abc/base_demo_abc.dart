@@ -7,6 +7,7 @@ class BaseDemoAbc extends StatelessWidget {
     this.children,
     this.scroll = false,
     this.scrollBar = false,
+    this.scrollController,
   }) : assert(child != null || children != null);
 
   final Widget child;
@@ -14,6 +15,7 @@ class BaseDemoAbc extends StatelessWidget {
   final List<Widget> children;
   final bool scroll;
   final bool scrollBar;
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class BaseDemoAbc extends StatelessWidget {
       dynamic list = ListView.builder(
           physics: absPhysics,
           itemCount: items.length,
+          controller: scrollController,
           itemBuilder: (ctx, index) {
             return items[index];
           });

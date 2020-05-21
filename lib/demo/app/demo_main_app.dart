@@ -35,57 +35,79 @@ final List<Widget> demoItems = List.from([
 ]);
 
 /// 主页面
-class DemoMainWidget extends StatelessWidget {
+class DemoMainWidget extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _DemoMainWidgetState();
+}
+
+class _DemoMainWidgetState extends State<DemoMainWidget> {
+  DateTime _lastPressedAt; //上次点击时间
+
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    return Scaffold(
-        backgroundColor: themeData.backgroundColor,
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(title),
-        ),
-        drawer: Drawer(
-            child: Container(
-          color: themeData.backgroundColor,
-          child: ListView(
-            physics:
-                AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-            children: <Widget>[
-              FlutterLogo(size: 120),
-              WhiteListTile(
-                title: Text("浏览Github"),
-                onTap: () {
-                  browseUrl(context, GITHUB_URL);
-                },
+    return WillPopScope(
+        child: Scaffold(
+            backgroundColor: themeData.backgroundColor,
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text(title),
+            ),
+            drawer: Drawer(
+                child: Container(
+              color: themeData.backgroundColor,
+              child: ListView(
+                physics: absPhysics,
+                children: <Widget>[
+                  FlutterLogo(size: 120),
+                  WhiteListTile(
+                    title: Text("浏览Github"),
+                    onTap: () {
+                      browseUrl(context, GITHUB_URL);
+                    },
+                  ),
+                  WhiteListTile(
+                    title: Text("打开Github"),
+                    onTap: () {
+                      launcher(GITHUB_URL);
+                    },
+                  ),
+                  WellItemWidget(
+                    child: Text("WellItemWidget Test"),
+                    onPressed: () {
+                      toast("${DateTime.now()}");
+                    },
+                  ),
+                  Expanded(
+                      child: Align(
+                    heightFactor: 5,
+                    child: Text(DateTime.now().toString()),
+                  ))
+                ],
               ),
-              WhiteListTile(
-                title: Text("打开Github"),
-                onTap: () {
-                  launcher(GITHUB_URL);
+            )),
+            body: NotificationListener<ScrollNotification>(
+                onNotification: (notification) {
+                  info(notification);
+                  return true;
                 },
-              ),
-              WellItemWidget(
-                child: Text("WellItemWidget Test"),
-                onPressed: () {
-                  toast("${DateTime.now()}");
-                },
-              ),
-              Expanded(
-                  child: Align(
-                heightFactor: 5,
-                child: Text(DateTime.now().toString()),
-              ))
-            ],
-          ),
-        )),
-        body: ListView.builder(
-            itemCount: demoItems.length,
-            physics:
-                AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-            itemBuilder: (ctx, index) {
-              return demoItems[index];
-            }));
+                child: ListView.builder(
+                    itemCount: demoItems.length,
+                    physics: absPhysics,
+                    itemBuilder: (ctx, index) {
+                      return demoItems[index];
+                    }))),
+        onWillPop: () async {
+          if (_lastPressedAt == null ||
+              DateTime.now().difference(_lastPressedAt) >
+                  Duration(seconds: 1)) {
+            //两次点击间隔超过1秒则重新计时
+            _lastPressedAt = DateTime.now();
+            toast("再按一次退出");
+            return false;
+          }
+          return true;
+        });
   }
 }
 

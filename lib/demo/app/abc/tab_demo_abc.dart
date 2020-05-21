@@ -7,7 +7,16 @@ class TabDemoAbc extends StatefulWidget {
 
 class _TabDemoAbcState extends State<TabDemoAbc>
     with SingleTickerProviderStateMixin {
-  final List tabs = [tx(), tx(), tx(), tx(), tx(), tx()];
+  final List<Widget> tabs = [text(), text(), text(), text(), text(), text()];
+
+  final List<Widget> tabsPages = [
+    TabPageWidget(),
+    TabPageWidget(),
+    TabPageWidget(),
+    TabPageWidget(),
+    TabPageWidget(),
+    TabPageWidget()
+  ];
 
   TabController _tabController;
 
@@ -33,18 +42,20 @@ class _TabDemoAbcState extends State<TabDemoAbc>
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("TabDemoAbc"),
         bottom: TabBar(
           isScrollable: true,
           controller: _tabController,
-          tabs: tabs.map((e) => Text(e)).toList(),
+          tabs: tabs,
         ),
       ),
       body: TabBarView(
+        physics: absPhysics,
         controller: _tabController,
-        children: tabs.map((e) => Text(e)).toList(),
+        children: tabsPages,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
@@ -55,9 +66,29 @@ class _TabDemoAbcState extends State<TabDemoAbc>
         shape: CircularNotchedRectangle(),
         child: Row(
           children: [
-            IconButton(icon: Icon(Icons.home)),
+            IconButton(
+              icon: navigationIndex == 0
+                  ? Icon(
+                      Icons.home,
+                      color: themeData.primaryColor,
+                    )
+                  : Icon(Icons.home),
+              onPressed: () {
+                onBottomNavigationChange(0);
+              },
+            ),
             SizedBox(), //中间位置空出
-            IconButton(icon: Icon(Icons.business)),
+            IconButton(
+              icon: navigationIndex == 2
+                  ? Icon(
+                      Icons.business,
+                      color: themeData.primaryColor,
+                    )
+                  : Icon(Icons.business),
+              onPressed: () {
+                onBottomNavigationChange(2);
+              },
+            ),
           ],
           mainAxisAlignment: MainAxisAlignment.spaceAround, //均分底部导航栏横向空间
         ),
@@ -81,5 +112,20 @@ class _TabDemoAbcState extends State<TabDemoAbc>
     setState(() {
       navigationIndex = value;
     });
+  }
+}
+
+class TabPageWidget extends StatelessWidget {
+  final Widget body = ListView.builder(
+      key: PageStorageKey(random.nextInt(100)),
+      physics: absPhysics,
+      itemCount: random.nextInt(100),
+      itemBuilder: (ctx, index) {
+        return image();
+      });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scrollbar(child: body);
   }
 }
