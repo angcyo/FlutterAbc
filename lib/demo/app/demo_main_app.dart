@@ -20,54 +20,18 @@ class DemoMainApp extends StatelessWidget {
 
 final List<Widget> demoItems = List.from([
   Container(height: 10),
-  DemoItemWidget("1.WidgetDemo", (context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => WidgetDemoAbc()));
-  }),
-  DemoItemWidget("2.ButtonDemo", (context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => ButtonDemoAbc()));
-  }),
-  DemoItemWidget("3.ImageDemo", (context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => ImageDemoAbc()));
-  }),
-  DemoItemWidget("4.CheckDemo", (context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => CheckDemoAbc()));
-  }),
-  DemoItemWidget("5.EditDemo", (context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => EditDemoAbc()));
-  }),
-  DemoItemWidget("6.IndicatorDemo", (context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => IndicatorDemoAbc()));
-  }),
-  DemoItemWidget("7.ScaffoldDemo", (context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => ScaffoldDemoAbc()));
-  }),
-  DemoItemWidget("8.TabDemo", (context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => TabDemoAbc()));
-  }),
-  DemoItemWidget("9.ClipDemo", (context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => ClipDemoAbc()));
-  }),
-  DemoItemWidget("10.GridDemo", (context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => GridDemoAbc()));
-  }),
-  DemoItemWidget("11.StaggeredDemo", (context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => StaggeredDemoAbc()));
-  }),
-  DemoItemWidget("12.CustomScrollDemo", (context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (ctx) => CustomScrollDemoAbc()));
-  }),
+  DemoItemWidget("1.WidgetDemo", WidgetDemoAbc()),
+  DemoItemWidget("2.ButtonDemo", ButtonDemoAbc()),
+  DemoItemWidget("3.ImageDemo", ImageDemoAbc()),
+  DemoItemWidget("4.CheckDemo", CheckDemoAbc()),
+  DemoItemWidget("5.EditDemo", EditDemoAbc()),
+  DemoItemWidget("6.IndicatorDemo", IndicatorDemoAbc()),
+  DemoItemWidget("7.ScaffoldDemo", ScaffoldDemoAbc()),
+  DemoItemWidget("8.TabDemo", TabDemoAbc()),
+  DemoItemWidget("9.ClipDemo", ClipDemoAbc()),
+  DemoItemWidget("10.GridDemo", GridDemoAbc()),
+  DemoItemWidget("11.StaggeredDemo", StaggeredDemoAbc()),
+  DemoItemWidget("12.CustomScrollDemo", CustomScrollDemoAbc()),
 ]);
 
 /// 主页面
@@ -127,10 +91,25 @@ class DemoMainWidget extends StatelessWidget {
 
 ///主页面 item widget
 class DemoItemWidget extends StatelessWidget {
-  DemoItemWidget(this.itemText, this.onTap, {Key key}) : super(key: key);
+  DemoItemWidget(
+    this.itemText,
+    this.route, {
+    Key key,
+    this.onTap,
+  })  : assert(route != null || onTap != null),
+        super(key: key);
 
   final String itemText;
+  final Widget route;
   final Function(BuildContext) onTap;
+
+  void onPress(BuildContext context) {
+    if (onTap != null) {
+      onTap(context);
+    } else if (route != null) {
+      Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => route));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +128,7 @@ class DemoItemWidget extends StatelessWidget {
             child: Ink(
               child: InkWell(
                 onTap: () {
-                  onTap(context);
+                  onPress(context);
                 },
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: 50),

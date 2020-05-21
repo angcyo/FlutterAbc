@@ -6,6 +6,7 @@ class ImageDemoAbc extends StatelessWidget {
     return BaseDemoAbc(
       "ImageDemoAbc",
       scroll: true,
+      scrollBar: true,
       children: <Widget>[
         image(width: 100),
         image(height: 100),
