@@ -4,7 +4,7 @@ class ImageDemoAbc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseDemoAbc(
-      this,
+      "ImageDemoAbc",
       scroll: true,
       children: <Widget>[
         image(width: 100),

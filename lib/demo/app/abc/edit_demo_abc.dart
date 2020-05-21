@@ -4,7 +4,7 @@ class EditDemoAbc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseDemoAbc(
-      this,
+      "EditDemoAbc",
       scroll: true,
       children: <Widget>[
         TextField(

@@ -35,7 +35,7 @@ class _CheckDemoAbcState extends State<CheckDemoAbc> {
   @override
   Widget build(BuildContext context) {
     return BaseDemoAbc(
-      widget,
+      "CheckDemoAbc",
       children: <Widget>[
         Switch(
           value: check,

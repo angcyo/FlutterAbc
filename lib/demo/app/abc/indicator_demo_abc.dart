@@ -11,7 +11,7 @@ class IndicatorDemoAbcState extends State<IndicatorDemoAbc> {
   @override
   Widget build(BuildContext context) {
     return BaseDemoAbc(
-      this,
+      "IndicatorDemoAbc",
       children: <Widget>[
         Padding(
           padding: EdgeInsets.all(4),

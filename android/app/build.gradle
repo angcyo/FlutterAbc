@@ -26,8 +26,16 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply from: './key.gradle'
 
+def _app_name = project.hasProperty("APP_NAME") ? project.ext.APP_NAME : ((project.name != "app") ? project.name : rootProject.name)
+
+static def apkTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("Asia/Shanghai"))
+}
+
+def apk_time = apkTime()
+
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -41,19 +49,60 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.angcyo.flutter.abc"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        resConfigs "zh", "xhdpi" //, "en"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
         debug {
             signingConfig signingConfigs.angcyo
         }
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+        profile {
             signingConfig signingConfigs.angcyo
+        }
+        release {
+            signingConfig signingConfigs.angcyo
+
+            minifyEnabled false
+            useProguard false
+            zipAlignEnabled false
+            shrinkResources false
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    /*Gradle3.3 以上的方法*/
+    applicationVariants.all { variant ->
+        if (variant.buildType.name == "release") {
+            def folder = new File(project.rootDir.absolutePath + "/apk")
+            variant.getPackageApplicationProvider().get().outputDirectory = folder
+            print "APK output:" + folder.absolutePath + "\n"
+
+            variant.getPackageApplicationProvider().get().outputScope.apkDatas.forEach { apkData ->
+                apkData.outputFileName = _app_name + "-" +
+                        variant.versionName + "_" +
+                        apk_time + "_" +
+                        variant.flavorName + "_" +
+                        variant.buildType.name + "_" +
+//                    variant.signingConfig.name + "_" +
+                        signConfig.key_alias +
+                        ".apk"
+            }
         }
     }
 }

@@ -35,7 +35,7 @@ class _TabDemoAbcState extends State<TabDemoAbc>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.toString()),
+        title: Text("TabDemoAbc"),
         bottom: TabBar(
           isScrollable: true,
           controller: _tabController,

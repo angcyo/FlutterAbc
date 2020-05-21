@@ -12,7 +12,7 @@ class ClipDemoAbc extends StatelessWidget {
             Image.network("https://avatars1.githubusercontent.com/u/6269676"));
 
     return BaseDemoAbc(
-      this,
+      "ClipDemoAbc",
       children: <Widget>[
         avatar,
         avatar2,

@@ -4,7 +4,7 @@ class GridDemoAbc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseDemoAbc(
-      this,
+      "GridDemoAbc",
       child: GridView.builder(
           physics:
               AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),

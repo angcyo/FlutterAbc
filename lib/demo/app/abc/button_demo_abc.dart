@@ -18,7 +18,7 @@ class ButtonDemoAbc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseDemoAbc(
-      this,
+      "ButtonDemoAbc",
       children: <Widget>[
         MaterialButton(
           highlightColor: Colors.blue[200], //按下去的颜色

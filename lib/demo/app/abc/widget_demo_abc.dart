@@ -13,7 +13,7 @@ class WidgetDemoAbc extends StatelessWidget {
             },
           )
         ],
-        title: Text(this.toString()),
+        title: Text("WidgetDemoAbc"),
       ),
       body: Center(
         child: Text(tx()),

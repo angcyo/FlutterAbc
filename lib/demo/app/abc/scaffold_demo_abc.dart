@@ -18,7 +18,7 @@ class _ScaffoldDemoAbcState extends State<ScaffoldDemoAbc> {
     return Scaffold(
       backgroundColor: themeData.backgroundColor,
       appBar: AppBar(
-        title: Text(widget.toString()),
+        title: Text("ScaffoldDemoAbc"),
         actions: <Widget>[icon(), icon()],
       ),
       floatingActionButton: FloatingActionButton(
