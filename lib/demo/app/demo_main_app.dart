@@ -9,12 +9,15 @@ const String title = "FlutterAbc Demo";
 class DemoMainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: title,
-      theme: ThemeData(
-          primarySwatch: Colors.blue, backgroundColor: Color(0xFFF4F4F4)),
-      home: DemoMainWidget(),
-    );
+    return OKToast(
+        dismissOtherOnShow: true,
+        position: ToastPosition.bottom,
+        child: MaterialApp(
+          title: title,
+          theme: ThemeData(
+              primarySwatch: Colors.blue, backgroundColor: Color(0xFFF4F4F4)),
+          home: DemoMainWidget(),
+        ));
   }
 }
 
@@ -33,7 +36,13 @@ final List<Widget> demoItems = List.from([
   DemoItemWidget("11.StaggeredDemo", StaggeredDemoAbc()),
   DemoItemWidget("12.CustomScrollDemo", CustomScrollDemoAbc()),
   DemoItemWidget("13.InheritedWidgetDemo", InheritedWidgetDemoAbc()),
+  DemoItemWidget("14.DialogDemo", DialogDemoAbc()),
 ]);
+
+Widget demoListView() => ListView.builder(
+    physics: absPhysics,
+    itemCount: demoItems.length,
+    itemBuilder: (ctx, index) => demoItems[index]);
 
 /// 主页面
 class DemoMainWidget extends StatefulWidget {
