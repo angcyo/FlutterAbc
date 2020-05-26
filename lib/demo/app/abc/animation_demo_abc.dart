@@ -1,3 +1,5 @@
+import 'package:flutter/scheduler.dart';
+
 import '../app.dart';
 
 class AnimationDemoAbc extends StatefulWidget {
@@ -32,13 +34,16 @@ class _AnimationDemoAbcState extends State<AnimationDemoAbc>
         CurvedAnimation(parent: animationController, curve: Curves.bounceInOut);
 
     //动画取值范围
-    animation =
-        Tween(begin: 0.0, end: 100.0 /*MediaQuery.of(context).size.width*/)
-            .animate(curve);
-    scaleAnimation = Tween(begin: 0.0, end: 1.0).animate(animationController);
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      animation = Tween(begin: 0.0, end: MediaQuery.of(context).size.width)
+          .animate(curve);
+      scaleAnimation = Tween(begin: 0.0, end: 1.0).animate(animationController);
 
-    animationController.forward();
-    scaleAnimationController.forward();
+      animationController.forward();
+      scaleAnimationController.forward();
+
+      setState(() {});
+    });
 
     super.initState();
   }
@@ -55,41 +60,43 @@ class _AnimationDemoAbcState extends State<AnimationDemoAbc>
     return BaseDemoAbc(
       "AnimationDemoAbc",
       scroll: true,
-      children: <Widget>[
-        Container(
-          alignment: Alignment.center,
-          color: Colors.black12,
-          child: _AnimatedWidgetDemo(
-            animation: animation,
-            imageUrl: img(),
-          ),
-        ),
-        AnimatedBuilder(
-          animation: animation,
-          builder: (ctx, child) {
-            return Container(
-              alignment: Alignment.center,
-              color: Colors.black26,
-              width: animation.value,
-              height: animation.value,
-              child: child,
-            );
-          },
-          child: image(),
-        ),
-        SizeTransition(
-          sizeFactor: scaleAnimation,
-          child: image(),
-        ),
-        ScaleTransition(
-          scale: scaleAnimation,
-          child: image(),
-        ),
-        FadeTransition(
-          opacity: animation,
-          child: image(),
-        ),
-      ],
+      children: animation != null
+          ? <Widget>[
+              Container(
+                alignment: Alignment.center,
+                color: Colors.black12,
+                child: _AnimatedWidgetDemo(
+                  animation: animation,
+                  imageUrl: img(),
+                ),
+              ),
+              AnimatedBuilder(
+                animation: animation,
+                builder: (ctx, child) {
+                  return Container(
+                    alignment: Alignment.center,
+                    color: Colors.black26,
+                    width: animation.value,
+                    height: animation.value,
+                    child: child,
+                  );
+                },
+                child: image(),
+              ),
+              SizeTransition(
+                sizeFactor: scaleAnimation,
+                child: image(),
+              ),
+              ScaleTransition(
+                scale: scaleAnimation,
+                child: image(),
+              ),
+              FadeTransition(
+                opacity: animation,
+                child: image(),
+              ),
+            ]
+          : [],
     );
   }
 }

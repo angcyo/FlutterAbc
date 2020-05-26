@@ -164,39 +164,38 @@ class DemoItemWidget extends StatelessWidget {
             error(context);
           },
           child: Material(
-            child: Ink(
-              child: InkWell(
-                onTap: () {
-                  onPress(context);
-                },
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: 50),
-                  child: Container(
-                    padding:
-                        EdgeInsets.only(top: 4, bottom: 4, left: 4, right: 4),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                          child: FlutterLogo(),
-                        ),
-                        Expanded(
-                          child: Hero(
-                            tag: heroTag,
-                            child: Text(
-                              itemText,
-                              maxLines: 5,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+            type: MaterialType.canvas,
+            child: InkWell(
+              onTap: () {
+                onPress(context);
+              },
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: 50),
+                child: Container(
+                  padding:
+                      EdgeInsets.only(top: 4, bottom: 4, left: 4, right: 4),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(4),
+                        child: FlutterLogo(),
+                      ),
+                      Expanded(
+                        child: Hero(
+                          tag: heroTag,
+                          child: Text(
+                            itemText,
+                            maxLines: 5,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        Icon(
-                          Icons.chevron_right,
-                          color: themeData.accentColor,
-                        )
-                      ],
-                    ),
+                      ),
+                      Icon(
+                        Icons.chevron_right,
+                        color: themeData.accentColor,
+                      )
+                    ],
                   ),
                 ),
               ),
