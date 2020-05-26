@@ -37,6 +37,7 @@ final List<Widget> demoItems = List.from([
   DemoItemWidget("12.CustomScrollDemo", CustomScrollDemoAbc()),
   DemoItemWidget("13.InheritedWidgetDemo", InheritedWidgetDemoAbc()),
   DemoItemWidget("14.DialogDemo", DialogDemoAbc()),
+  DemoItemWidget("15.AnimationDemo", AnimationDemoAbc()),
 ]);
 
 Widget demoListView() => ListView.builder(
@@ -127,27 +128,31 @@ class _DemoMainWidgetState extends State<DemoMainWidget> {
 class DemoItemWidget extends StatelessWidget {
   DemoItemWidget(
     this.itemText,
-    this.route, {
+    this.routePage, {
     Key key,
     this.onTap,
-  })  : assert(route != null || onTap != null),
+  })  : assert(routePage != null || onTap != null),
         super(key: key);
 
   final String itemText;
-  final Widget route;
+  final Widget routePage;
   final Function(BuildContext) onTap;
 
   void onPress(BuildContext context) {
     if (onTap != null) {
       onTap(context);
-    } else if (route != null) {
-      Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => route));
+    } else if (routePage != null) {
+      //Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => routePage));
+      Navigator.of(context).push(Right2LeftRouter(targetPage: routePage));
+      //Navigator.of(context).push(Bottom2UpRouter(targetPage: routePage));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+
+    final heroTag = itemText.substring(itemText.indexOf(".") + 1) + "Abc";
 
     return Padding(
         padding: EdgeInsets.only(top: 1),
@@ -177,10 +182,13 @@ class DemoItemWidget extends StatelessWidget {
                           child: FlutterLogo(),
                         ),
                         Expanded(
-                          child: Text(
-                            itemText,
-                            maxLines: 5,
-                            overflow: TextOverflow.ellipsis,
+                          child: Hero(
+                            tag: heroTag,
+                            child: Text(
+                              itemText,
+                              maxLines: 5,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
                         Icon(

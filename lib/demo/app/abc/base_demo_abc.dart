@@ -50,7 +50,10 @@ class BaseDemoAbc extends StatelessWidget {
     return Scaffold(
         appBar: GradientAppBar(
           centerTitle: true,
-          title: Text("$title"),
+          title: Hero(
+            tag: title,
+            child: Text("$title"),
+          ),
           gradientStart: themeData.primaryColor,
           gradientEnd: themeData.primaryColorDark,
         ),

@@ -9,7 +9,7 @@ class ClipDemoAbc extends StatelessWidget {
     dynamic avatar2 = SizedBox.fromSize(
         size: Size(100, 100),
         child:
-            Image.network("https://avatars1.githubusercontent.com/u/6269676"));
+            Image.network("https://portrait.gitee.com/uploads/avatars/user/47/143008_angcyo_1578919345.png"));
 
     return BaseDemoAbc(
       "ClipDemoAbc",
