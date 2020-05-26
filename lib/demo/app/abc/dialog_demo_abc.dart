@@ -282,7 +282,7 @@ class _DialogDemoAbcState extends State<DialogDemoAbc> {
   _datePicker() async {
     final result = await showDatePicker(
         context: context,
-        //locale: Locale("zh"),
+        //locale: Locale('zh', 'CN'),
         initialDate: DateTime.now(),
         firstDate: DateTime.now(),
         lastDate: DateTime.now().add(Duration(days: 31)));

@@ -14,6 +14,15 @@ class DemoMainApp extends StatelessWidget {
         position: ToastPosition.bottom,
         child: MaterialApp(
           title: title,
+          localizationsDelegates: [
+            // 本地化的代理类
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: [
+            const Locale('en', 'US'), // 美国英语
+            const Locale('zh', 'CN'), // 中文简体
+          ],
           theme: ThemeData(
               primarySwatch: Colors.blue, backgroundColor: Color(0xFFF4F4F4)),
           home: DemoMainWidget(),
