@@ -34,7 +34,7 @@ class _AnimationDemoAbcState extends State<AnimationDemoAbc>
         CurvedAnimation(parent: animationController, curve: Curves.bounceInOut);
 
     //动画取值范围
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.scheduleFrameCallback((timeStamp) {
       animation = Tween(begin: 0.0, end: MediaQuery.of(context).size.width)
           .animate(curve);
       scaleAnimation = Tween(begin: 0.0, end: 1.0).animate(animationController);
@@ -43,6 +43,8 @@ class _AnimationDemoAbcState extends State<AnimationDemoAbc>
       scaleAnimationController.forward();
 
       setState(() {});
+
+      info("this...");
     });
 
     super.initState();

@@ -9,6 +9,9 @@ const String title = "FlutterAbc Demo";
 class DemoMainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    info(bool.fromEnvironment("dart.vm.product"));
+    info(String.fromEnvironment("dart.vm.product"));
+
     return OKToast(
         dismissOtherOnShow: true,
         position: ToastPosition.bottom,

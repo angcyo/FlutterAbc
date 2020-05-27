@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 import '../app.dart';
 
 ///const FlatButton({
@@ -103,7 +105,14 @@ class ButtonDemoAbc extends StatelessWidget {
             },
             icon: Icon(Icons.add_circle),
           ),
-        )
+        ),
+        CupertinoButton(child: text(), onPressed: () {}),
+        CupertinoButton(child: text(), color: Colors.pink, onPressed: () {}),
+        CupertinoButton(child: text(), color: Colors.teal, onPressed: () {}),
+        CupertinoActivityIndicator(),
+        CupertinoActivityIndicator(
+          animating: false,
+        ),
       ],
     );
   }
